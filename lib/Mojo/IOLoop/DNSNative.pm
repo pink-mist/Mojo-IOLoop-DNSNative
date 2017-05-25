@@ -85,7 +85,7 @@ L<Mojo::IOLoop::DNSNative> implements the following attributes.
   my $ndn = $dns->NDN;
   $dns    = $dns->NDN(Net::DNS::Native->new(pool => 5, extra_thread => 1));
 
-The underlying L<Net::DNS::Native> object used to perform lookups.
+The underlying L<Net::DNS::Native> object used to perform lookups. Defaults to a C<Net::DNS::Native> singleton object as above.
 
 =head2 reactor
 
@@ -99,7 +99,7 @@ Low-level event reactor, defaults to the C<reactor> attribute of the global L<Mo
   my $timeout = $dns->timeout;
   $dns        = $dns->timeout(10);
 
-Sets the timeout for lookups. Use 0 to disable timeouts.
+Sets the timeout for lookups. Use 0 to disable timeouts. Defaults to 10.
 
 =head1 METHODS
 
