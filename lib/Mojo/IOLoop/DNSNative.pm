@@ -20,19 +20,22 @@ sub lookup {
   my $ndn     = $self->NDN;
 
   my $handle = $ndn->getaddrinfo($address, undef);
-  my $tid = $reactor->timer(
-    $self->timeout,
-    sub {
-      $ndn->timedout($handle);
-      $reactor->remove($handle);
-      $cb->('DNS lookup timed out');
-    }
-  );
+  my $tid;
+  if (my $timeout = $self->timeout) {
+    $tid = $reactor->timer(
+      $timeout,
+      sub {
+        $ndn->timedout($handle);
+        $reactor->remove($handle);
+        $cb->('DNS lookup timed out');
+      }
+    );
+  }
   $reactor->io(
     $handle => sub {
       my $reactor = shift;
       $reactor->remove($handle);
-      $reactor->remove($tid);
+      $reactor->remove($tid) if defined $tid;
       my ($err, @res) = $ndn->get_result($handle);
 
       $cb->(
