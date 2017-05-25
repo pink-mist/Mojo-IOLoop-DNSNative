@@ -1,7 +1,7 @@
 package Mojo::IOLoop::DNSNative;
 
 # ABSTRACT: Async native DNS lookup
-use Mojo::Base qw/ Mojo::Base /;
+use Mojo::Base -base;
 
 use List::Util qw/ uniq /;
 use Mojo::IOLoop;
