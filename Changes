@@ -1,4 +1,7 @@
 {{$NEXT}}
+ - Fix a few details in the attribute documentation.
+ - Add tests.
+ - Specify correct versions for prerequisites.
 
 0.001     2017-05-25 14:57:09+02:00 Europe/Stockholm
  - Initial release.
